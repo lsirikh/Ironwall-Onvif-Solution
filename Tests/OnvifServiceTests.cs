@@ -197,7 +197,7 @@ public class OnvifServiceTests
             new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
             async (cm, ct) =>
             {
-                var model = await Svc.InitializePtzAsync(cm);   // 비동기 I/O
+                var model = await Svc.InitializeFullAsync(cm);   // 비동기 I/O
                 bag.Add(($"{cm.IpAddress}_{DateTime.Now.Ticks}", model));
             });
 
@@ -271,7 +271,7 @@ public class OnvifServiceTests
         var initTasks = CamConnections
                     .Select(async cm =>
                     {
-                        var model = await Svc.InitializePtzAsync(cm);
+                        var model = await Svc.InitializeFullAsync(cm);
                         return (cm.IpAddress, model);
                     })
                     .ToList();
@@ -312,7 +312,7 @@ public class OnvifServiceTests
         var initTasks = CamConnections
                     .Select(async cm =>
                     {
-                        var model = await Svc.InitializePtzAsync(cm);
+                        var model = await Svc.InitializeFullAsync(cm);
                         return (cm.IpAddress, model);
                     })
                     .ToList();
